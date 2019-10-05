@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
 class AddModal extends Component {
