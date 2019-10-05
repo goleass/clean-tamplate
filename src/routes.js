@@ -7,6 +7,7 @@ import { DefaultLayout } from "./layouts";
 // Route Views
 import Home from './views/home'
 import Errors from "./views/Errors";
+import Candidates from "./views/Candidates";
 
 export default [
   {
@@ -14,6 +15,11 @@ export default [
     exact: true,
     layout: DefaultLayout,
     component: () => <Redirect to="/home" />
+  },
+  {
+    path: "/candidatos",
+    layout: DefaultLayout,
+    component: Candidates,
   },
   {
     path: "/home",
