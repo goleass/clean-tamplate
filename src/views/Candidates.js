@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container } from 'shards-react'
 
-import TableCandidates from '../components/TableCandidates'
+import TableCandidates from '../components/candidates/TableCandidates'
 
 class Candidates extends Component {
   render() {
