@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, CardHeader, CardBody, Button } from 'shards-react'
 
 import PageTitle from './common/PageTitle'
-import AddModal from './AddModal'
+import AddModal from './Modals/AddModal'
 
 const staticData = [
   {

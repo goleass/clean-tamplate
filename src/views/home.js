@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container } from 'shards-react'
 import { Button, ButtonToolbar } from 'react-bootstrap'
 
-import MyVerticallyCenteredModal from '../components/AddModal'
+import MyVerticallyCenteredModal from '../components/Modals/AddModal'
 
 class Home extends Component{
 	constructor(props) {

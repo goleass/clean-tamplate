@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
 class AddModal extends Component {
@@ -11,7 +11,7 @@ class AddModal extends Component {
 
 	render(){
 
-		const { cpf,nome,idade,cidade,interesse } = this.props.data
+		const { ...data } = this.props
 
 		return(
 		<Modal
@@ -26,7 +26,7 @@ class AddModal extends Component {
 	        </Modal.Title>
 	      </Modal.Header>
 	      <Modal.Body>
-	        <h5>{nome}</h5>
+	        <h5>{console.log(data)}</h5>
 	        <p>
 	          
 	        </p>
