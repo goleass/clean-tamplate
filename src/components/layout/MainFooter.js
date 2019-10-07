@@ -39,28 +39,12 @@ MainFooter.propTypes = {
 
 MainFooter.defaultProps = {
   contained: false,
-  copyright: "Copyright © 2018 DesignRevision",
+  copyright: "Copyright © 2019 Zanc",
   menuItems: [
     {
       title: "Home",
-      to: "#"
+      to: "/home"
     },
-    {
-      title: "Services",
-      to: "#"
-    },
-    {
-      title: "About",
-      to: "#"
-    },
-    {
-      title: "Products",
-      to: "#"
-    },
-    {
-      title: "Blog",
-      to: "#"
-    }
   ]
 };
 
