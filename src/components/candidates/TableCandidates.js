@@ -1,30 +1,38 @@
 import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, CardHeader, CardBody, Button } from 'shards-react'
 
-import PageTitle from '../common/PageTitle'
 import ModalCandidate from '../Modals/ModalCandidate'
+import SelectInfo from './SelectInfo'
 
 const staticData = [
   {
     cpf: '04775861042',
+    rg: '6126140232',
+    reservista: '571440684625662',
     nome: 'Leonardo Gomes Assunção',
     cidade: 'Canoas',
-    idade: '19',
-    interesse: 'Desenvolvimento'
+    nascimento: '20/10/1999',
+    interesse: 'Desenvolvimento',
+    sexo: 'masculino'
   },
   {
     cpf: '04775861043',
     nome: 'Nicoli Gomes Assunção',
+    rg: '6126140232',
     cidade: 'Esteio',
-    idade: '15',
-    interesse: 'Desenvolvimento'
+    nascimento: '20/10/1999',
+    interesse: 'Desenvolvimento',
+    sexo: 'feminino'
   },
   {
     cpf: '04775961042',
+    rg: '6126140232',
+    reservista: '571440684625662',
     nome: 'Marco Antônio Assunção',
     cidade: 'Porto Alegre',
-    idade: '45',
-    interesse: 'Desenvolvimento'
+    nascimento: '20/10/1999',
+    interesse: 'Desenvolvimento',
+    sexo: 'masculino'
   }
 ]
 
@@ -48,14 +56,11 @@ class TableCandidates extends Component {
   render() {
     return (
       <Fragment>
-        <Row noGutters className="page-header py-4">
-          <PageTitle sm="4" title="Candidatos" subtitle="Cúrriculos cadastrados" className="text-sm-left" />
-        </Row>
         <Row>
           <Col>
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
-                <h6 className="m-0">Informações</h6>
+                <SelectInfo />
               </CardHeader>
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
@@ -64,7 +69,7 @@ class TableCandidates extends Component {
                       <th scope="col" className="border-0">#</th>
                       <th scope="col" className="border-0">CPF</th>
                       <th scope="col" className="border-0">Nome</th>
-                      <th scope="col" className="border-0">Idade</th>
+                      <th scope="col" className="border-0">Nascimento</th>
                       <th scope="col" className="border-0">Cidade</th>
                       <th scope="col" className="border-0">Interesse</th>
                       <th scope="col" className="border-0">Full</th>
@@ -77,7 +82,7 @@ class TableCandidates extends Component {
                           <td>{index+1}</td>
                           <td>{cand.cpf}</td>
                           <td>{cand.nome}</td>
-                          <td>{cand.idade}</td>
+                          <td>{cand.nascimento}</td>
                           <td>{cand.cidade}</td>
                           <td>{cand.interesse}</td>
                           <td>

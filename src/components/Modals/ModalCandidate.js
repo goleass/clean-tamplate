@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import CurriculumDetailsCandidate from '../candidates/curriculoDetailsCandidate/CurriculumDetailsCandidate';
+import CandidateDetails from '../candidates/CandidateDetails/CandidateDetails';
 
 class ModalCandidate extends Component {
 
@@ -22,7 +22,7 @@ class ModalCandidate extends Component {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<CurriculumDetailsCandidate data={data}/>
+						<CandidateDetails data={data}/>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button >Enviar para análise</Button>
