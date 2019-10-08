@@ -5,7 +5,7 @@ import { Row, Col } from "shards-react";
 import SmallStats from '../common/SmallStats'
 
 const Dashboard = ({ smallStats }) => (
-    <Row>
+    <React.Fragment>
       {smallStats.map((stats, idx) => (
         <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
           <SmallStats
@@ -21,7 +21,7 @@ const Dashboard = ({ smallStats }) => (
           />
         </Col>
       ))}
-    </Row>
+    </React.Fragment>
 );
 
 Dashboard.propTypes = {
@@ -47,7 +47,7 @@ Dashboard.defaultProps = {
           borderWidth: 1.5,
           backgroundColor: "rgba(0, 184, 216, 0.1)",
           borderColor: "rgb(0, 184, 216)",
-          data: [5, 2, 1, 3, 5, 4, 1]
+          data: [1, 2, 3, 3, 3, 4, 4]
         }
       ]
     },

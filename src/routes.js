@@ -4,11 +4,14 @@ import { Redirect } from "react-router-dom";
 // Layout Types
 import { DefaultLayout } from "./layouts";
 
-// Route Views
+// View Components
 import Home from './views/home'
 import Errors from "./views/Errors";
 import Candidates from "./views/Candidates";
+import CandidatesAnalysis from "./views/CandidatesAnalysis";
+import CandidateInterview from "./views/CandiadatesIterview";
 
+// Route Views
 export default [
   {
     path: "/",
@@ -17,14 +20,24 @@ export default [
     component: () => <Redirect to="/home" />
   },
   {
+    path: "/home",
+    layout: DefaultLayout,
+    component: Home
+  },
+  {
     path: "/candidatos",
     layout: DefaultLayout,
     component: Candidates,
   },
   {
-    path: "/home",
+    path: "/analise-candidatos",
     layout: DefaultLayout,
-    component: Home
+    component: CandidatesAnalysis
+  },
+  {
+    path: "/entrevista-candidatos",
+    layout: DefaultLayout,
+    component: CandidateInterview
   },
   {
     path: "/errors",

@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import { Row, Col, Card, CardHeader, CardBody, Button } from 'shards-react'
+import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect } from 'shards-react'
 
 import ModalCandidate from '../Modals/ModalCandidate'
-import SelectInfo from './SelectInfo'
 
 const staticData = [
   {
@@ -49,6 +48,10 @@ class TableCandidates extends Component {
         cidade: '',
         idade: '',
         interesse: ''
+      },
+      selectInfo: {
+        site: '' || 'todos',
+        interesse: '' || 'todos'
       }
     }
   }
@@ -60,7 +63,41 @@ class TableCandidates extends Component {
           <Col>
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
-                <SelectInfo />
+                
+              <Col>
+                <FormSelect
+                  size="sm"
+                  style={{ maxWidth: "130px" }}
+                  onChange={(e) => {this.setState({site:e.target.value})}}
+                >
+                  <option value="todos">Todos sites</option>
+                  <option value="Desenvovimeto"></option>
+                  <option value="Recursos Humanos"></option>
+                  <option value="Administração"></option>
+                  {console.log(this.state)}
+                </FormSelect>
+                <FormSelect
+                  size="sm"
+                  style={{ maxWidth: "130px" }}
+                  onChange={(e) => {this.setState({interesse:e.target.value})}}
+                >
+                  <option value="todos">Todas as áreas</option>
+                  <option value="Porto Alegre"></option>
+                  <option value="Canoas"></option>
+                  <option value="São Paulo"></option>
+                </FormSelect>
+                <FormSelect
+                  size="sm"
+                  style={{ maxWidth: "130px" }}
+                  onChange={(e) => {this.setState({interesse:e.target.value})}}
+                >
+                  <option value="todos">Todas as áreas</option>
+                  <option value="Porto Alegre"></option>
+                  <option value="Canoas"></option>
+                  <option value="São Paulo"></option>
+                </FormSelect>
+              </Col>
+
               </CardHeader>
               <CardBody className="p-0 pb-3">
                 <table className="table mb-0">
@@ -86,7 +123,7 @@ class TableCandidates extends Component {
                           <td>{cand.cidade}</td>
                           <td>{cand.interesse}</td>
                           <td>
-                            <Button pill outline size="sm-0" className="mb-0" onClick={() => this.setState({ modalShow: true, infoModal: cand })}>Info</Button>
+                            <Button outline size="sm" className="mb-0" onClick={() => this.setState({ modalShow: true, infoModal: cand })}>Info</Button>
                           </td>
                         </tr>
                       </Fragment>
