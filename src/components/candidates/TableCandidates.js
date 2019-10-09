@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect } from 'shards-react'
+import axios from 'axios'
 
 import ModalCandidate from '../Modals/ModalCandidate'
+import Alert from '../common/AlertI'
 
 const staticData = [
   {
@@ -36,12 +38,22 @@ const staticData = [
 ]
 
 class TableCandidates extends Component {
-
   constructor(props) {
     super(props)
 
+    // data vai conter todos os dados do candidato, ainda precisa ser alterada conforme a estrutura que a api irá retornar
     this.state = {
       modalShow: false,
+      data: {
+        cpf: '',
+        rg: '',
+        reservista: '',
+        nome: '',
+        cidade: '',
+        nascimento: '',
+        interesse: '',
+        sexo: ''
+      },
       infoModal: {
         cpf: '',
         nome: '',
@@ -55,21 +67,69 @@ class TableCandidates extends Component {
     }
   }
 
+  showAlert=false
+  textAlert= ''
+
+  UNSAFE_componentWillMount() {
+    // setta alguns dados retornados da api antes que o componente da tabela seja montado
+
+    this.setState({ data:staticData })
+    //axios.get(`http://nossaapi.api/`)
+    //  .then(res => {
+    //    const data = res.data
+    //    this.setState({ data:data })
+    //  })
+  }
+
   handleChangeSite = e => {
     this.setState({ site:e.target.value })
   }
+
   handleChangeArea = e => {
     this.setState({ interesse:e.target.value })
   }
+
   handleChangePI = e => {
     this.setState({ pi:e.target.value })
   }
 
+  handleInfoTableCpf = (cpf) => {
+    // Connection Api
+    // axios.get(`http://nossaapi.api/?cpf=${cpf}`)
+    //   .then(res => {
+    //     const data = res.data
+    //     this.setState({ data:data })
+    //   })
+  }
+
+  handleInfoTable = () => {
+    const { site, interesse, pi } = this.state
+    // Connection Api
+    axios.get(`http://nossaapi.api/?site=${site}&interesse=${interesse}&pi=${pi}`)
+      .then(res => {
+        const data = res.data
+        this.setState({ data:data })
+      })
+      .catch(() => this.setShowTextAlert(true, "Erro no banco"))
+  }
+
+  setShowTextAlert = (showAlert = false, textAlert = '') => {
+    this.showAlert = showAlert
+    this.textAlert = textAlert
+  }
+
   render() {
+    const data = this.state.data
     return (
       <Fragment>
         <Row>
           <Col>
+          <Alert 
+            show={this.showAlert} 
+            theme="warning" 
+            text={this.textAlert}
+            onClose={this.setShowTextAlert(false)}
+            />
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
                 
@@ -112,8 +172,8 @@ class TableCandidates extends Component {
                     size="sm" 
                     theme="primary" 
                     className="mb-2 mr-1"
-                    onClick={() => alert(`Dados do select: ${this.state.site} ${this.state.interesse} ${this.state.pi}`)}
-                    ><i class="fas fa-search"></i>
+                    onClick={() => this.handleInfoTable()}
+                    ><i className="fas fa-search"></i>
                   </Button>
                 </Col>
               </Row>
@@ -123,6 +183,7 @@ class TableCandidates extends Component {
                 <table className="table mb-0">
                   <thead className="bg-light">
                     <tr>
+                      {console.log("rederizado")}
                       <th scope="col" className="border-0">#</th>
                       <th scope="col" className="border-0">CPF</th>
                       <th scope="col" className="border-0">Nome</th>
@@ -133,8 +194,8 @@ class TableCandidates extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {staticData.map((cand, index) => (
-                      <Fragment>
+                    {data.map((cand, index) => (
+                      <Fragment key={index}>
                         <tr>
                           <td>{index+1}</td>
                           <td>{cand.cpf}</td>
