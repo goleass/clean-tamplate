@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Container, Row } from 'shards-react'
 
 import PageTitle from '../components/common/PageTitle'
-import CandidateCard from '../components/candidates/CandidateCard'
 
 const data = [
   {
@@ -30,7 +29,6 @@ class CandidatesAnalysis extends Component {
           <PageTitle sm="4" title="Análise de Candidatos" subtitle="Primeira Etapa" />
         </Row>
         <Row>
-          <CandidateCard data={data}/>
         </Row>
       </Container>
     )

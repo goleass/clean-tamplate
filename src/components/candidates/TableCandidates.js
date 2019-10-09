@@ -49,11 +49,20 @@ class TableCandidates extends Component {
         idade: '',
         interesse: ''
       },
-      selectInfo: {
-        site: '' || 'todos',
-        interesse: '' || 'todos'
-      }
+      site: 'todos',
+      interesse: 'todos',
+      pi: 'todos'
     }
+  }
+
+  handleChangeSite = e => {
+    this.setState({ site:e.target.value })
+  }
+  handleChangeArea = e => {
+    this.setState({ interesse:e.target.value })
+  }
+  handleChangePI = e => {
+    this.setState({ pi:e.target.value })
   }
 
   render() {
@@ -64,39 +73,50 @@ class TableCandidates extends Component {
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
                 
-              <Col>
-                <FormSelect
-                  size="sm"
-                  style={{ maxWidth: "130px" }}
-                  onChange={(e) => {this.setState({site:e.target.value})}}
-                >
-                  <option value="todos">Todos sites</option>
-                  <option value="Desenvovimeto"></option>
-                  <option value="Recursos Humanos"></option>
-                  <option value="Administração"></option>
-                  {console.log(this.state)}
-                </FormSelect>
-                <FormSelect
-                  size="sm"
-                  style={{ maxWidth: "130px" }}
-                  onChange={(e) => {this.setState({interesse:e.target.value})}}
-                >
-                  <option value="todos">Todas as áreas</option>
-                  <option value="Porto Alegre"></option>
-                  <option value="Canoas"></option>
-                  <option value="São Paulo"></option>
-                </FormSelect>
-                <FormSelect
-                  size="sm"
-                  style={{ maxWidth: "130px" }}
-                  onChange={(e) => {this.setState({interesse:e.target.value})}}
-                >
-                  <option value="todos">Todas as áreas</option>
-                  <option value="Porto Alegre"></option>
-                  <option value="Canoas"></option>
-                  <option value="São Paulo"></option>
-                </FormSelect>
-              </Col>
+              <Row className="mt-2">
+                <Col>
+                  <FormSelect
+                    className="mb-2 mr-1"
+                    size="sm"
+                    style={{ maxWidth: "130px" }}
+                    onChange={e => this.handleChangeSite(e)}
+                  >
+                    <option value="todos">Todos sites</option>
+                    <option value="Porto Alegre">Porto Alegre</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Santa Catarina">Santa Catarina</option>
+                  </FormSelect>
+                  <FormSelect
+                    className="mb-2 mr-1"
+                    size="sm"
+                    style={{ maxWidth: "130px" }}
+                    onChange={e => this.handleChangeArea(e)}
+                  >
+                    <option value="todos">Todas Áreas</option>
+                    <option value="Desenvovimeto">Desenvolvimento</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="Administração">Administração</option>
+                  </FormSelect>
+                  <FormSelect
+                    className="mb-2 mr-1"
+                    size="sm"
+                    style={{ maxWidth: "130px" }}
+                    onChange={(e) => this.handleChangePI(e)}
+                  >
+                    <option value="todos">PI - todos</option>
+                    <option value="Aventureiro">Aventureiro</option>
+                    <option value="Criativo">Criativo</option>
+                    <option value="Sociável">Sociável</option>
+                  </FormSelect>
+                  <Button 
+                    size="sm" 
+                    theme="primary" 
+                    className="mb-2 mr-1"
+                    onClick={() => alert(`Dados do select: ${this.state.site} ${this.state.interesse} ${this.state.pi}`)}
+                    ><i class="fas fa-search"></i>
+                  </Button>
+                </Col>
+              </Row>
 
               </CardHeader>
               <CardBody className="p-0 pb-3">
