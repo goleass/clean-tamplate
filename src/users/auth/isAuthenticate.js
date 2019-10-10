@@ -1,0 +1,5 @@
+isAuthenticate = () => {
+
+  //regras
+  return true
+}

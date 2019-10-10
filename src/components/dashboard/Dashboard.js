@@ -120,7 +120,7 @@ Dashboard.defaultProps = {
           label: "Today",
           fill: "start",
           borderWidth: 1.5,
-          backgroundColor: "rgb(0,123,255,0.1)",
+          backgroundColor: "",
           borderColor: "rgb(0,123,255)",
           data: [3, 2, 3, 2, 4, 5, 7]
         }
@@ -139,7 +139,7 @@ Dashboard.defaultProps = {
           label: "Today",
           fill: "start",
           borderWidth: 1.5,
-          backgroundColor: "rgb(0,123,255,0.1)",
+          backgroundColor: "",
           borderColor: "rgb(0,123,255)",
           data: [3, 2, 3, 2, 4, 5, 4]
         }

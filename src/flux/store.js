@@ -6,7 +6,9 @@ import getSidebarNavItems from "../data/sidebar-nav-items";
 
 let _store = {
   menuVisible: false,
-  navItems: getSidebarNavItems()
+  navItems: getSidebarNavItems(),
+  showAlert: true,
+  errors: []
 };
 
 class Store extends EventEmitter {
@@ -24,6 +26,9 @@ class Store extends EventEmitter {
       case Constants.TOGGLE_SIDEBAR:
         this.toggleSidebar();
         break;
+      case Constants.SHOW_ALERT:
+        this.showAlert()
+        break;
       default:
     }
   }
@@ -31,6 +36,18 @@ class Store extends EventEmitter {
   toggleSidebar() {
     _store.menuVisible = !_store.menuVisible;
     this.emit(Constants.CHANGE);
+  }
+
+  showAlert = () => {
+    _store.showAlert = _store.showAlert ? false : true
+  }
+
+  setError = (error) => {
+    return {..._store, errors:error}
+  }
+
+  getAlertShow = () => {
+    return _store.showAlert
   }
 
   getMenuState() {

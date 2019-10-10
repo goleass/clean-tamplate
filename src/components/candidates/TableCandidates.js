@@ -3,7 +3,6 @@ import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect } from 'shards
 import axios from 'axios'
 
 import ModalCandidate from '../Modals/ModalCandidate'
-import Alert from '../common/AlertI'
 
 const staticData = [
   {
@@ -41,19 +40,9 @@ class TableCandidates extends Component {
   constructor(props) {
     super(props)
 
-    // data vai conter todos os dados do candidato, ainda precisa ser alterada conforme a estrutura que a api irá retornar
     this.state = {
       modalShow: false,
-      data: {
-        cpf: '',
-        rg: '',
-        reservista: '',
-        nome: '',
-        cidade: '',
-        nascimento: '',
-        interesse: '',
-        sexo: ''
-      },
+      data: {},
       infoModal: {
         cpf: '',
         nome: '',
@@ -61,9 +50,9 @@ class TableCandidates extends Component {
         idade: '',
         interesse: ''
       },
-      site: 'todos',
-      interesse: 'todos',
-      pi: 'todos'
+      site: '',
+      interesse: '',
+      pi: ''
     }
   }
 
@@ -81,25 +70,36 @@ class TableCandidates extends Component {
     //  })
   }
 
-  handleChangeSite = e => {
-    this.setState({ site:e.target.value })
-  }
+  handleChange = e => {
+    const { name, value } = e.target
+    console.log(name)
+    
+    switch (name) {
+      case 'site':
+        this.setState({ site:value })
+        break;
 
-  handleChangeArea = e => {
-    this.setState({ interesse:e.target.value })
-  }
+      case 'pi':
+        this.setState({ pi:value })
+        break;
 
-  handleChangePI = e => {
-    this.setState({ pi:e.target.value })
+      case 'interesse':
+        this.setState({ interesse:value })
+        break;
+      
+      default:
+        break;
+    }
+    
   }
 
   handleInfoTableCpf = (cpf) => {
     // Connection Api
-    // axios.get(`http://nossaapi.api/?cpf=${cpf}`)
-    //   .then(res => {
-    //     const data = res.data
-    //     this.setState({ data:data })
-    //   })
+    axios.get(`http://nossaapi.api/?cpf=${cpf}`)
+      .then(res => {
+        const data = res.data
+        this.setState({ data:data })
+      })
   }
 
   handleInfoTable = () => {
@@ -124,12 +124,6 @@ class TableCandidates extends Component {
       <Fragment>
         <Row>
           <Col>
-          <Alert 
-            show={this.showAlert} 
-            theme="warning" 
-            text={this.textAlert}
-            onClose={this.setShowTextAlert(false)}
-            />
             <Card small className="mb-4">
               <CardHeader className="border-bottom">
                 
@@ -138,35 +132,38 @@ class TableCandidates extends Component {
                   <FormSelect
                     className="mb-2 mr-1"
                     size="sm"
+                    name="site"
                     style={{ maxWidth: "130px" }}
-                    onChange={e => this.handleChangeSite(e)}
+                    onChange={e => this.handleChange(e)}
                   >
                     <option value="todos">Todos sites</option>
-                    <option value="Porto Alegre">Porto Alegre</option>
-                    <option value="São Paulo">São Paulo</option>
-                    <option value="Santa Catarina">Santa Catarina</option>
+                    <option value="poa">Porto Alegre</option>
+                    <option value="sp">São Paulo</option>
+                    <option value="sc">Santa Catarina</option>
                   </FormSelect>
                   <FormSelect
                     className="mb-2 mr-1"
                     size="sm"
+                    name="interesse"
                     style={{ maxWidth: "130px" }}
-                    onChange={e => this.handleChangeArea(e)}
+                    onChange={e => this.handleChange(e)}
                   >
                     <option value="todos">Todas Áreas</option>
-                    <option value="Desenvovimeto">Desenvolvimento</option>
-                    <option value="Recursos Humanos">Recursos Humanos</option>
-                    <option value="Administração">Administração</option>
+                    <option value="desenvolvimento">Desenvolvimento</option>
+                    <option value="recursos_humanos">Recursos Humanos</option>
+                    <option value="administracao">Administração</option>
                   </FormSelect>
                   <FormSelect
                     className="mb-2 mr-1"
                     size="sm"
+                    name="pi"
                     style={{ maxWidth: "130px" }}
-                    onChange={(e) => this.handleChangePI(e)}
+                    onChange={(e) => this.handleChange(e)}
                   >
                     <option value="todos">PI - todos</option>
-                    <option value="Aventureiro">Aventureiro</option>
-                    <option value="Criativo">Criativo</option>
-                    <option value="Sociável">Sociável</option>
+                    <option value="aventureiro">Aventureiro</option>
+                    <option value="criativo">Criativo</option>
+                    <option value="socialvel">Sociável</option>
                   </FormSelect>
                   <Button 
                     size="sm" 
