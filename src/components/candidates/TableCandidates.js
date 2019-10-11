@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect } from 'shards-react'
+import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect, FormInput, InputGroup} from 'shards-react'
 import axios from 'axios'
 
 import ModalCandidate from '../Modals/ModalCandidate'
+import { Constants, Dispatcher } from '../../flux'
 
 const staticData = [
   {
@@ -52,7 +53,8 @@ class TableCandidates extends Component {
       },
       site: '',
       interesse: '',
-      pi: ''
+      pi: '',
+      cpf: ''
     }
   }
 
@@ -72,7 +74,6 @@ class TableCandidates extends Component {
 
   handleChange = e => {
     const { name, value } = e.target
-    console.log(name)
     
     switch (name) {
       case 'site':
@@ -93,6 +94,13 @@ class TableCandidates extends Component {
     
   }
 
+  handleMsg = (err, type) => {
+    Dispatcher.dispatch({
+      actionType: Constants.SHOW_ALERT,
+      payload: { err, type }
+    })
+  }
+
   handleInfoTableCpf = (cpf) => {
     // Connection Api
     axios.get(`http://nossaapi.api/?cpf=${cpf}`)
@@ -100,6 +108,7 @@ class TableCandidates extends Component {
         const data = res.data
         this.setState({ data:data })
       })
+      .catch(() => this.handleMsg("Erro no banco", "warning"))
   }
 
   handleInfoTable = () => {
@@ -110,13 +119,10 @@ class TableCandidates extends Component {
         const data = res.data
         this.setState({ data:data })
       })
-      .catch(() => this.setShowTextAlert(true, "Erro no banco"))
+      .catch(() => this.handleMsg("Erro no banco de dados", "warning"))
   }
 
-  setShowTextAlert = (showAlert = false, textAlert = '') => {
-    this.showAlert = showAlert
-    this.textAlert = textAlert
-  }
+
 
   render() {
     const data = this.state.data
@@ -172,6 +178,21 @@ class TableCandidates extends Component {
                     onClick={() => this.handleInfoTable()}
                     ><i className="fas fa-search"></i>
                   </Button>
+                  <InputGroup className="w-25 float-right">
+                    <FormInput 
+                      className="mb-2 mr-1" 
+                      size="sm" 
+                      name="cpf"
+                      placeholder="CPF"
+                      onChange={e => this.handleChange(e)} />
+                    <Button 
+                    size="sm" 
+                    theme="primary" 
+                    className="mb-2 mr-1"
+                    onClick={() => this.handleInfoTableCpf()}
+                    ><i className="fas fa-search"></i>
+                  </Button>
+                  </InputGroup>
                 </Col>
               </Row>
 
@@ -180,7 +201,6 @@ class TableCandidates extends Component {
                 <table className="table mb-0">
                   <thead className="bg-light">
                     <tr>
-                      {console.log("rederizado")}
                       <th scope="col" className="border-0">#</th>
                       <th scope="col" className="border-0">CPF</th>
                       <th scope="col" className="border-0">Nome</th>

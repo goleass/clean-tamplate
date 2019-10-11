@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Col } from "shards-react";
+import { Col } from "shards-react";
 
 import SmallStats from '../common/SmallStats'
 

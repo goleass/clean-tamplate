@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Button } from 'shards-react'
+import { Container, Row } from 'shards-react'
 
 import PageTitle from '../components/common/PageTitle'
 

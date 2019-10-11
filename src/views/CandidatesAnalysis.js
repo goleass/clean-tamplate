@@ -3,24 +3,6 @@ import { Container, Row } from 'shards-react'
 
 import PageTitle from '../components/common/PageTitle'
 
-const data = [
-  {
-    nome: "Leonardo"
-  },
-  {
-    nome: "Fernanda"
-  },
-  {
-    nome: "Rafael"
-  },
-  {
-    nome: "Bruna"
-  },
-  {
-    nome: "Felipe"
-  },
-]
-
 class CandidatesAnalysis extends Component {
   render() {
     return(
