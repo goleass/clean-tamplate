@@ -19,7 +19,7 @@ class SidebarNavItems extends React.Component {
     Store.addChangeListener(this.onChange);
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     Store.removeChangeListener(this.onChange);
   }
 
