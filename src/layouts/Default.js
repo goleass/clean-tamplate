@@ -1,50 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col, Alert } from "shards-react";
+import { Container, Row, Col } from "shards-react";
 
 import MainNavbar from "../components/layout/MainNavbar/MainNavbar";
 import MainSidebar from "../components/layout/MainSidebar/MainSidebar";
 import MainFooter from "../components/layout/MainFooter";
-import Store from  '../flux/store'
 
 
 class DefaultLayout extends Component {
-  _isMonted = false
-
-  constructor(props) {
-        super(props)
-    
-        this.state = {
-          showAlert: Store.getAlertShow(),
-          alertType: Store.getAlertType(),
-          msg: Store.getMsg()
-        }
-    }
-
-  componentDidMount() {
-    this._isMonted = true
-  }
-
-  UNSAFE_componentWillMount() {
-    Store.addChangeListener(this.onChange)
-  }
-
-  componentWillUnmount() {
-    this._isMonted = false
-  }
-
-  dismiss = () => {
-    Store.showAlert()
-  }
-
-  onChange = () => {
-    this.setState({
-      ...this.state,
-      showAlert: Store.getAlertShow(),
-      alertType: Store.getAlertType(),
-      msg: Store.getMsg()
-    })
-  }
 
   render() {
     return(
@@ -59,10 +22,6 @@ class DefaultLayout extends Component {
         tag="main"
       >
         {!this.props.noNavbar && <MainNavbar />}
-        {/* {nessa posição, o alert irá ser renderizado na parte de baixo da pagina} */}
-        <Alert theme={this.state.alertType} dismissible={this.dismiss} open={this.state.showAlert && this._isMonted}>
-          {this.state.msg}
-        </Alert>  
         {this.props.children}
         {!this.props.noFooter && <MainFooter />}
       </Col>

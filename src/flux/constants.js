@@ -1,6 +1,4 @@
 export default {
   CHANGE: "CHANGE",
   TOGGLE_SIDEBAR: "TOGGLE_SIDEBAR",
-  SHOW_ALERT: "SHOW_ALERT",
-  SET_MSG: "SET_MSG"
 };
