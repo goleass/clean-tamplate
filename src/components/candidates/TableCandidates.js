@@ -3,7 +3,7 @@ import { Row, Col, Card, CardHeader, CardBody, Button, FormSelect, FormInput, In
 import axios from 'axios'
 
 import ModalCandidate from '../Modals/ModalCandidate'
-import { Constants, Dispatcher } from '../../flux'
+import { toastr } from 'react-redux-toastr'
 
 const staticData = [
   {
@@ -65,11 +65,12 @@ class TableCandidates extends Component {
     // setta alguns dados retornados da api antes que o componente da tabela seja montado
 
     this.setState({ data:staticData })
-    //axios.get(`http://nossaapi.api/`)
-    //  .then(res => {
-    //    const data = res.data
-    //    this.setState({ data:data })
-    //  })
+    axios.get(`http://nossaapi.api/`)
+     .then(res => {
+       const data = res.data
+       this.setState({ data:data })
+     })
+     .catch(err => toastr.warning('Sem conexão com o banco'))
   }
 
   handleChange = e => {
@@ -94,12 +95,6 @@ class TableCandidates extends Component {
     
   }
 
-  handleMsg = (err, type) => {
-    Dispatcher.dispatch({
-      actionType: Constants.SHOW_ALERT,
-      payload: { err, type }
-    })
-  }
 
   handleInfoTableCpf = (cpf) => {
     // Connection Api
@@ -108,7 +103,7 @@ class TableCandidates extends Component {
         const data = res.data
         this.setState({ data:data })
       })
-      .catch(() => this.handleMsg("Erro no banco", "warning"))
+      .catch(() => toastr.warning('Erro no Banco', 'Não foi possível consultar ao banco de dados no momento'))
   }
 
   handleInfoTable = () => {
@@ -119,7 +114,7 @@ class TableCandidates extends Component {
         const data = res.data
         this.setState({ data:data })
       })
-      .catch(() => this.handleMsg("Erro no banco de dados", "warning"))
+      .catch(() => toastr.warning('Erro no Banco', 'Não foi possível consultar ao banco de dados no momento'))
   }
 
 

@@ -1,28 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from  'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from "prop-types";
 import { Col } from "shards-react";
 
+import { getTeste } from './DashboardActions'
 import SmallStats from '../common/SmallStats'
 
-const Dashboard = ({ smallStats }) => (
-    <React.Fragment>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-            percentage={stats.percentage}
-            increase={stats.increase}
-            decrease={stats.decrease}
-          />
-        </Col>
-      ))}
-    </React.Fragment>
-);
+class Dashboard extends Component{
+
+  render(){
+    return(
+        <>
+          {this.props.smallStats.map((stats, idx) => (
+            <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
+              <SmallStats
+                id={`small-stats-${idx}`}
+                variation="1"
+                chartData={stats.datasets}
+                chartLabels={stats.chartLabels}
+                label={stats.label}
+                value={stats.value}
+                percentage={stats.percentage}
+                increase={stats.increase}
+                decrease={stats.decrease}
+              />
+            </Col>
+          ))}
+        </>
+    )
+  }
+}
 
 Dashboard.propTypes = {
   /**
@@ -148,4 +156,7 @@ Dashboard.defaultProps = {
   ]
 };
 
-export default Dashboard;
+const mapStateToProps = state => ({ teste: state.dashboard.teste })
+const mapDispatchToProps = dispatch => bindActionCreators({ getTeste }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
