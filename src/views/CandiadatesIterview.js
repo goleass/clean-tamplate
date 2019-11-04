@@ -4,7 +4,7 @@ import DataTimePicker from  'react-datetime-picker';
 import { toastr } from 'react-redux-toastr'
 
 import PageTitle from '../components/common/PageTitle'
-import { day, month } from '../components/common/date/date'
+import { day, month } from '../utils/date'
 
 class CandidateInterview extends Component {
   state = {
@@ -17,9 +17,10 @@ class CandidateInterview extends Component {
     const date = new Date()
     if(date < this.state.date){
       const d = this.state.date.getDay()
+      const dm = this.state.date.getDate()
       const m = this.state.date.getMonth()
       const h = `${this.state.date.getHours()}:${this.state.date.getMinutes()}`
-      toastr.info(`Entrevista agendada para dia ${d} (${day[d]}) de ${month[m]}, às ${h}`);
+      toastr.info(`Entrevista agendada para dia ${dm} (${day[d]}) de ${month[m]}, às ${h}`);
     }else {
       toastr.warning('A data para entrevista é inferior ou igual a de hoje');
       this.setState({ date })

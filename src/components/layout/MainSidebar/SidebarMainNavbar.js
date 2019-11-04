@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Navbar, NavbarBrand } from "shards-react";
 
 import { Dispatcher, Constants } from "../../../flux";
+import { getTeste } from './SidebarMainNavbarActions'
 
 class SidebarMainNavbar extends React.Component {
   constructor(props) {
@@ -69,4 +72,6 @@ SidebarMainNavbar.defaultProps = {
   hideLogoText: false
 };
 
-export default SidebarMainNavbar;
+const masDispachToProps = dispatch => bindActionCreators({ getTeste },dispatch)
+
+export default connect(null, masDispachToProps)(SidebarMainNavbar);

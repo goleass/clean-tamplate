@@ -1,4 +1,6 @@
 import React from "react";
+import { connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Col } from "shards-react";
@@ -69,4 +71,8 @@ MainSidebar.defaultProps = {
   hideLogoText: false
 };
 
-export default MainSidebar;
+const mapStateToProps = state => ({
+  sidebarNavItems: state.sidebar
+})
+
+export default connect(mapStateToProps)(MainSidebar);
