@@ -16,7 +16,7 @@
     "input-moment": "^0.4.0",
     "jquery": "^3.4.1",
     "lodash.find": "^4.6.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "npm": "^6.12.1",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.0-beta.14",
